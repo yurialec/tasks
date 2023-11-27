@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Task\TaskController;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +16,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return 'It Works';
+
+    try {
+        DB::connection();
+        echo DB::connection()->getDatabaseName();
+    } catch (\Exception $e) {
+        echo 'None';
+    }
 });
 
 Route::prefix('tasks/')->group(function () {
