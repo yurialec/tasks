@@ -23,7 +23,12 @@ class TasksRepository implements ITasksRepository
     public function getAll()
     {
         $tasks = $this->model->all();
-        TaskResource::collection($tasks);
+
+        if ($tasks->isEmpty()) {
+            return [];
+        } else {
+            return TaskResource::collection($tasks);
+        }
     }
 
     public function get(int $id)

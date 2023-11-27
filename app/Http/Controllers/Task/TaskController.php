@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Task;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateTaskRequest;
+use App\Http\Requests\UpdateTaskRequest;
 use App\Services\Tasks\TasksService;
 
 class TaskController extends Controller
@@ -17,16 +18,12 @@ class TaskController extends Controller
 
     public function store(CreateTaskRequest $request)
     {
-        dd('Aqui');
         $data = $request->all();
-        dd($data);
-
         return $this->service->store($data);
     }
 
     public function getAll()
     {
-        dd('Aqui');
         return $this->service->getAll();
     }
 
@@ -35,8 +32,9 @@ class TaskController extends Controller
         return $this->service->get($id);
     }
 
-    public function update(array $data, int $id)
+    public function update(UpdateTaskRequest $request, int $id)
     {
+        $data = $request->all();
         return $this->service->update($data, $id);
     }
 

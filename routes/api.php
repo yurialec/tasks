@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Task\TaskController;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,16 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-
-    try {
-        DB::connection();
-        echo DB::connection()->getDatabaseName();
-    } catch (\Exception $e) {
-        echo 'None';
-    }
+    return 'It Works';
 });
 
 Route::prefix('tasks/')->group(function () {
     Route::get('index', [TaskController::class, 'getAll']);
     Route::post('create', [TaskController::class, 'store']);
+    Route::get('show/{id}', [TaskController::class, 'get']);
+    Route::post('update/{id}', [TaskController::class, 'update']);
+    Route::delete('delete/{id}', [TaskController::class, 'destroy']);
 });
